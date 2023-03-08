@@ -51,14 +51,12 @@ const main = () => {
 	fs.createReadStream('./pipes_sizes.csv')
 		.pipe(parse({ delimiter: ',', from_line: 1 }))
 		.on('data', function (row) {
-			// csvString += row.join();
 			csv.push(row.join(',').replace('"', '""'));
 		})
 		.on('error', function (error) {
 			console.log(error.message);
 		})
 		.on('end', function () {
-			// console.log(csv);
 			parseCsv(csv.join(EOL));
 		});
 };
